@@ -8,11 +8,13 @@ tempdict = {}
 im = Image.new('RGBA', (577, 577), 'black')
 pixel = im.load()
 
+# default simple color scheme
 def color (temperature):
     ff = 5.1
     hue = int(ff*float(temperature))
     return (hue,105-hue,135-hue)
 
+# first vasa interpolation
 def colorvasa (temperature):
     d = 50
     tmax = 50
@@ -20,6 +22,7 @@ def colorvasa (temperature):
     hue = int(float(temperature))
     return (int((hue-tmin)*255/d), hue,  int((tmax-hue)*255/d))
 
+#second vasa interpolation
 def colorvasa2 (temperature):
     d = 40
     tmax = 46
@@ -41,6 +44,7 @@ def temper_print(tempdict):
                     temperature = 0
 
                 (red, green, blue) = color(temperature)
+                #(red, green, blue) = colorvasa(temperature)
                 #(red, green, blue) = colorvasa2(temperature)
                 for p in range(0, move):
                     for l in range(0, move):
