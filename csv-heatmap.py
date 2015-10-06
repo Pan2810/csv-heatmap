@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-import time
+#import time
+from datetime import datetime
 import csv
 from PIL import Image
 
@@ -7,12 +8,14 @@ tempdict = {}
 (pix, move, hue) = (1, 4, 0)
 im = Image.new('RGBA', (577, 577), 'black')
 pixel = im.load()
+# RGB weight
+(rl,gl,bl) = (1,1,1)
 
 # default simple color scheme
 def color (temperature):
     ff = 5.1
     hue = int(ff*float(temperature))
-    return (hue,105-hue,135-hue)
+    return (int(hue*rl),105-int(hue*gl),135-int((hue*bl)))
 
 # first vasa interpolation
 def colorvasa (temperature):
@@ -67,4 +70,11 @@ with open('2015.csv', 'rb') as cvsfile:
             pix += move
 cvsfile.close()
 
+
+
+i = datetime.now()
+imfilename = "img/" + i.strftime('%Y.%m.%d-%H.%M.%S') + ".png"
+#print "Image saved in: " + imfilename
+
 im.show()
+im.save(imfilename,"PNG")
