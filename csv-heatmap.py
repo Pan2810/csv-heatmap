@@ -8,13 +8,13 @@ tempdict = {}
 (pix, move, hue) = (1, 4, 0)
 im = Image.new('RGBA', (577, 577), 'black')
 pixel = im.load()
-# RGB weight
-(rl,gl,bl) = (1,1,1)
+# RGB weights
+(rl,gl,bl) = (1,.9,0.8)
 
 # default simple color scheme
 def color (temperature):
     ff = 5.1
-    hue = int(ff*float(temperature))
+    hue = ff*float(temperature)
     return (int(hue*rl),105-int(hue*gl),135-int((hue*bl)))
 
 # first vasa interpolation
@@ -70,11 +70,9 @@ with open('2015.csv', 'rb') as cvsfile:
             pix += move
 cvsfile.close()
 
-
-
-i = datetime.now()
-imfilename = "img/" + i.strftime('%Y.%m.%d-%H.%M.%S') + ".png"
-#print "Image saved in: " + imfilename
+day = datetime.now()
+imfilename = "img/" + day.strftime('%Y.%m.%d-%H.%M.%S') + ".png"
 
 im.show()
 im.save(imfilename,"PNG")
+#EOF

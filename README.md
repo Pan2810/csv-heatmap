@@ -16,7 +16,14 @@ Following python script takes the file,
 grabs each line, reads the temperature and tries
 to graph each day in a single line of the image.
 
-*Dependencies*
+The real gotcha is the color rendering based on temperature. Quite a number of different algorithms exist, but the simple (RGB) based on temperature:
+```
+hue = CONSTANT*float(temperature)
+return (int(hue*rl),105-int(hue*gl),135-int((hue*bl)))
+
+#where rl, gl, bl are weights for each RGB  
+```
+**Dependencies**
 - standard CSV module
 - PIL Python Image Library
 
