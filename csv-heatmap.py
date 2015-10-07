@@ -70,9 +70,10 @@ with open('2015.csv', 'rb') as cvsfile:
             pix += move
 cvsfile.close()
 
+# Displaying and saving the output file
+# example: img/2015.10.07-09.04.51.png
 day = datetime.now()
 imfilename = "img/" + day.strftime('%Y.%m.%d-%H.%M.%S') + ".png"
-
 im.show()
 im.save(imfilename,"PNG")
 #EOF
