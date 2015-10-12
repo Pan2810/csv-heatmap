@@ -6,10 +6,13 @@ from PIL import Image
 
 tempdict = {}
 (pix, move, hue) = (1, 4, 0)
-im = Image.new('RGBA', (577, 577), 'black')
+# 4*6*24 pixels X 365*4 pixels + 1
+# One day, one image per 10minutes = 144 pixels
+# times 4 (for picture to be bigger)
+im = Image.new('RGBA', (577, 1461), 'black')
 pixel = im.load()
 # RGB weights
-(rl,gl,bl) = (1,.9,0.8)
+(rl,gl,bl) = (1,0.9,0.9)
 
 # default simple color scheme
 def color (temperature):
