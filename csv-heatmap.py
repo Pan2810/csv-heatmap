@@ -12,11 +12,12 @@ tempdict = {}
 im = Image.new('RGBA', (577, 1461), 'black')
 pixel = im.load()
 # RGB weights
-(rl,gl,bl) = (1,0.9,0.9)
+(rl,gl,bl) = (1,0.9,0.7)
+# Color magnification constant
+ff = 5.2
 
 # default simple color scheme
 def color (temperature):
-    ff = 5.1
     hue = ff*float(temperature)
     return (int(hue*rl),105-int(hue*gl),135-int((hue*bl)))
 
