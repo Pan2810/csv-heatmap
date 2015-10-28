@@ -3,6 +3,7 @@
 from datetime import datetime
 import csv
 from PIL import Image
+import os.path
 
 tempdict = {}
 (pix, move, hue) = (1, 4, 0)
@@ -76,6 +77,10 @@ cvsfile.close()
 
 # Displaying and saving the output file
 # example: img/2015.10.07-09.04.51.png
+if not os.path.isdir("img"):
+    print "IMG dir does not exist, create it: mkdir img    Exiting now"
+    exit(1)
+
 day = datetime.now()
 imfilename = "img/" + day.strftime('%Y.%m.%d-%H.%M.%S') + ".png"
 im.show()
