@@ -59,21 +59,23 @@ def temper_print(tempdict):
                         pixel[counter + p, pix + l] = (red, green, blue, 255)
             counter += move
 # END of function  temper_print
+try:
+    with open('2015.csv', 'rb') as cvsfile:
+        file = csv.reader(cvsfile, delimiter=',', quotechar='|')
+        for row in file:
+            (date, unix, temp) = row
+            day = date[0:10]
+            time = date[11:16]
+            if time == '00:00':
+                tempdict = {}
 
-with open('2015.csv', 'rb') as cvsfile:
-    file = csv.reader(cvsfile, delimiter=',', quotechar='|')
-    for row in file:
-        (date, unix, temp) = row
-        day = date[0:10]
-        time = date[11:16]
-        if time == '00:00':
-            tempdict = {}
-
-        tempdict[time] = temp
-        if time == '23:50':
-            temper_print(tempdict)
-            pix += move
-cvsfile.close()
+            tempdict[time] = temp
+            if time == '23:50':
+                temper_print(tempdict)
+                pix += move
+    cvsfile.close()
+except IOError as e:
+    print "CVS file problem: I/O error({0}): {1}".format(e.errno, e.strerror)
 
 # Displaying and saving the output file
 # example: img/2015.10.07-09.04.51.png
@@ -84,5 +86,8 @@ if not os.path.isdir("img"):
 day = datetime.now()
 imfilename = "img/" + day.strftime('%Y.%m.%d-%H.%M.%S') + ".png"
 im.show()
-im.save(imfilename,"PNG")
+try:
+    im.save(imfilename,"PNG")
+except IOError as e:
+    print "Image file I/O error({0}): {1}".format(e.errno, e.strerror)
 #EOF
