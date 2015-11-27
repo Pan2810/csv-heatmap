@@ -64,6 +64,8 @@ try:
         file = csv.reader(cvsfile, delimiter=',', quotechar='|')
         for row in file:
             (date, unix, temp) = row
+            #CVS line - date, UNIXdate, temperature in celsius
+            #2015-11-25 18:30:21.000,1448472621,-5.25
             day = date[0:10]
             time = date[11:16]
             if time == '00:00':
